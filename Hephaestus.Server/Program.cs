@@ -1,4 +1,5 @@
 using Hephaestus.Server.Data;
+using Hephaestus.Server.Model;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,6 +45,20 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast")
 .WithOpenApi();
+
+app.MapPost("add-failure", async (Failure failure, HephaestusDbContext hephaestusDbContext) =>
+{
+    hephaestusDbContext.Add(failure);
+    await hephaestusDbContext.SaveChangesAsync();
+    return Results.Created($"/failures/{failure.Id}", failure);
+}
+);
+
+app.MapGet("get-failures", async (HephaestusDbContext hephaestusDbContext) =>
+{
+    return await hephaestusDbContext.Failures.ToListAsync();
+}
+);
 
 app.MapFallbackToFile("/index.html");
 
