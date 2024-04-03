@@ -24,7 +24,7 @@ namespace Hephaestus.Server.Data
                 .HasConversion(v => v.ToString(), v => (FailureType)Enum.Parse(typeof(FailureType), v));
 
             modelBuilder.Entity<Failure>().Property(e => e.Status)
-                .HasConversion(v => v.ToString(), v => (Status)Enum.Parse(typeof(FailureType), v));
+                .HasConversion(v => v.ToString(), v => (Status)Enum.Parse(typeof(Status), v));
         }
     }
 }
