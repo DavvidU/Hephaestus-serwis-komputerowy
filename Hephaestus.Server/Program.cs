@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Zarejestrowanie kontekstu bazy danych
+
 builder.Services.AddDbContext<HephaestusDbContext>(options =>
                     options.UseSqlServer(builder.Configuration.GetConnectionString("HephaestusContext")));
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
