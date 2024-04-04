@@ -39,7 +39,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapPost("add-failure", async (Failure failure, HephaestusDbContext hephaestusDbContext) =>
+app.MapPost("add-failure", async (Failure failureToAdd, HephaestusDbContext hephaestusDbContext) =>
 {
     // Validation
     if (!FailureVaildator.IsFailureVaild(failureToAdd)) 
