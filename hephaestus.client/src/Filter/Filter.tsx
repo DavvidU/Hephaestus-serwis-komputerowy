@@ -1,7 +1,8 @@
 import React from 'react'
 
-export default function Filter() {
+function Filter() {
   return (
-    <div>filtr</div>
+    <div>Filtrowanie</div>
   )
 }
+export default Filter;

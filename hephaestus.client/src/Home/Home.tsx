@@ -1,7 +1,8 @@
 import React from 'react'
 
-export default function Home() {
+function Home() {
   return (
-    <div>home</div>
+    <div>Filtrowanie</div>
   )
 }
+export default Home;

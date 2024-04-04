@@ -1,7 +1,8 @@
 import React from 'react'
 
-export default function Failure_Details() {
+function Failure_Details() {
   return (
     <div>failure_details</div>
   )
 }
+export default Failure_Details;
