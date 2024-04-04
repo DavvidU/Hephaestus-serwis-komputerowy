@@ -13,11 +13,22 @@ builder.Services.AddDbContext<HephaestusDbContext>(options =>
 // Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin", builder =>
+    {
+        builder.WithOrigins("https://localhost:5173")
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 
 app.UseDefaultFiles();
 app.UseStaticFiles();
+
+app.UseCors("AllowSpecificOrigin");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -28,9 +39,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-/* Create */
-
-app.MapPost("/failures", async (Failure failureToAdd, HephaestusDbContext hephaestusDbContext) =>
+app.MapPost("add-failure", async (Failure failure, HephaestusDbContext hephaestusDbContext) =>
 {
     // Validation
     if (!FailureVaildator.IsFailureVaild(failureToAdd)) 
