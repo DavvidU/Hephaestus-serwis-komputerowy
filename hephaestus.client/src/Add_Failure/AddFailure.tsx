@@ -13,12 +13,12 @@ interface FailureData {
 
 const AddFailure: React.FC = () => {
   const [failureData, setFailureData] = useState<FailureData>({
-    failureType: '',
+    failureType: '0',
     name: '',
-    date: '',
+    date: new Date().toISOString().slice(0, 10),
     potentialPrice: '',
     potentialDate: '',
-    status: '',
+    status: '0',
     repairDescription: ''
   });
 
@@ -47,12 +47,12 @@ const AddFailure: React.FC = () => {
 
       // Clear form fields after successful submission
       setFailureData({
-        failureType: '',
+        failureType: '0',
         name: '',
-        date: '',
+        date: new Date().toISOString().slice(0, 10),
         potentialPrice: '',
         potentialDate: '',
-        status: '',
+        status: '0',
         repairDescription: ''
       });
     } catch (error) {
@@ -98,6 +98,7 @@ const AddFailure: React.FC = () => {
             name="date"
             value={failureData.date}
             onChange={handleChange}
+            disabled
             required
           />
         </label>
