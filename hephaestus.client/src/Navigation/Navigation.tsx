@@ -17,7 +17,6 @@ function Navigation() {
                     <Nav.Link as={Link} to={"/"}>Strona Główna</Nav.Link>
                     <Nav.Link as={Link} to={"/failure/list"}>Lista awarii</Nav.Link>
                     <Nav.Link as={Link} to={"/failure/add"}>Dodaj awarię</Nav.Link>
-                    <Nav.Link as={Link} to={"/failure/edit/:id"}>Edycja awarii</Nav.Link>
                 </Nav>
             </Navbar>
 
