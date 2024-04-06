@@ -30,11 +30,13 @@ function Failure_Details() {
         fetchFailureDetails(id);
     }, [id]);
 
+    //Changing dates to dd/mm/yyyy format
     const formatDate = (dateString: string) => {
         const formattedDate = format(new Date(dateString), 'dd/MM/yyyy');
         return formattedDate;
     };
 
+    //Changing numbers to string values - type
     const mapFailureTypeToText = (type: number) => {
         switch (type) {
             case 0:
@@ -50,6 +52,7 @@ function Failure_Details() {
         }
     };
 
+    //Changing numbers to string values - status
     const mapStatusToText = (status: number) => {
         switch (status) {
             case 0:
@@ -89,14 +92,17 @@ function Failure_Details() {
                     <p>Potential Date: {formatDate(failure.potentialDate)}</p>
                     <p>Status: {mapStatusToText(failure.status)}</p>
                     <p>Repair Description: {failure.repairDescription}</p>
+                    <Link to={`/failure/edit/${id}`}>
+                        <button>Edit</button>
+                    </Link>
+                    <button onClick={handleDelete}>Delete</button>
                 </div>
             ) : (
-                <p>Loading...</p>
+                <div>
+                    <p>Loading...</p>
+                    <p>There may be no failure with that id.</p>
+                </div>
             )}
-            <Link to={`/failure/edit/${id}`}>
-                <button>Edit</button>
-            </Link>
-            <button onClick={handleDelete}>Delete</button>
         </div>
     )
 }

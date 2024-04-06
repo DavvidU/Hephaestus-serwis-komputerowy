@@ -12,6 +12,8 @@ interface FailureData {
 }
 
 const AddFailure: React.FC = () => {
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [failureData, setFailureData] = useState<FailureData>({
     failureType: '0',
     name: '',
@@ -30,34 +32,52 @@ const AddFailure: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Convert string values to numbers
-    const convertedData = {
-      ...failureData,
-      failureType: parseInt(failureData.failureType),
-      status: parseInt(failureData.status)
-    };
+      //Validation
+      setError("");
+      setSuccess("");
+      let valid = true;
+      const potentialDate = new Date(failureData.potentialDate);
+      const date = new Date(failureData.date);
+      if (parseInt(failureData.potentialPrice) < 0) {
+          setError("The price can't be lower than 0.");
+          valid = false;
+      }
+      else if (potentialDate < date) {
+          setError("Potential Date can't be earlier than Date.");
+          valid = false;
+      }
 
-    try {
-      const response = await axios.post(
-        'https://localhost:7292/add-failure',
-        convertedData
-      );
+      if (valid) {
+          // Convert string values to numbers
+          const convertedData = {
+              ...failureData,
+              failureType: parseInt(failureData.failureType),
+              status: parseInt(failureData.status)
+          };
 
-      console.log('Server response:', response.data);
+          try {
+              const response = await axios.post(
+                  'https://localhost:7292/add-failure',
+                  convertedData
+              );
 
-      // Clear form fields after successful submission
-      setFailureData({
-        failureType: '0',
-        name: '',
-        date: new Date().toISOString().slice(0, 10),
-        potentialPrice: '',
-        potentialDate: '',
-        status: '0',
-        repairDescription: ''
-      });
-    } catch (error) {
-      console.error('Error occurred:', error);
-    }
+              console.log('Server response:', response.data);
+
+              // Clear form fields after successful submission
+              setFailureData({
+                  failureType: '0',
+                  name: '',
+                  date: new Date().toISOString().slice(0, 10),
+                  potentialPrice: '',
+                  potentialDate: '',
+                  status: '0',
+                  repairDescription: ''
+              });
+              setSuccess("Failure added successfully.");
+          } catch (error) {
+              console.error('Error occurred:', error);
+          }
+      }
   };
 
 
@@ -150,8 +170,10 @@ const AddFailure: React.FC = () => {
           />
         </label>
         <br />
+        {error && <div style={{ color: 'red' }}>{error}</div>}
         <button type="submit">Submit</button>
       </form>
+          {success && <div style={{ color: 'green' }}>{success}</div>}
     </div>
   );
 };
