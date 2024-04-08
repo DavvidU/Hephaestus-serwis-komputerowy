@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { format } from 'date-fns';
 import axios from 'axios';
+import mapFailureTypeToText from '../Mappers/MapFailureTypeToText'
+import mapStatusToText from '../Mappers/MapStatusToText'
+import mapDateFormat from '../Mappers/MapDateFormat'
 
 interface FailureData {
     failureType: number;
@@ -30,44 +33,6 @@ function Failure_Details() {
         fetchFailureDetails(id);
     }, [id]);
 
-    //Changing dates to dd/mm/yyyy format
-    const formatDate = (dateString: string) => {
-        const formattedDate = format(new Date(dateString), 'dd/MM/yyyy');
-        return formattedDate;
-    };
-
-    //Changing numbers to string values - type
-    const mapFailureTypeToText = (type: number) => {
-        switch (type) {
-            case 0:
-                return 'Low';
-            case 1:
-                return 'Mild';
-            case 2:
-                return 'High';
-            case 3:
-                return 'Critical';
-            default:
-                return 'Error';
-        }
-    };
-
-    //Changing numbers to string values - status
-    const mapStatusToText = (status: number) => {
-        switch (status) {
-            case 0:
-                return 'New';
-            case 1:
-                return 'In Progress';
-            case 2:
-                return 'Finished';
-            case 3:
-                return 'Unrepairable';
-            default:
-                return 'Error';
-        }
-    };
-
     const handleDelete = async () => {
         const confirmDelete = window.confirm('Are you sure you want to delete this failure?');
         if (confirmDelete) {
@@ -87,9 +52,9 @@ function Failure_Details() {
                     <h2>Failure Details</h2>
                     <p>Failure Type: {mapFailureTypeToText(failure.failureType)}</p>
                     <p>Name: {failure.name}</p>
-                    <p>Date: {formatDate(failure.date)}</p>
+                    <p>Date: {mapDateFormat(failure.date)}</p>
                     <p>Potential Price: {failure.potentialPrice}</p>
-                    <p>Potential Date: {formatDate(failure.potentialDate)}</p>
+                    <p>Potential Date: {mapDateFormat(failure.potentialDate)}</p>
                     <p>Status: {mapStatusToText(failure.status)}</p>
                     <p>Repair Description: {failure.repairDescription}</p>
                     <Link to={`/failure/edit/${id}`}>

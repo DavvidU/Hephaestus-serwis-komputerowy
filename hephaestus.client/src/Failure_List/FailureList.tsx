@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import mapFailureTypeToText from '../Mappers/MapFailureTypeToText'
+import mapStatusToText from '../Mappers/MapStatusToText'
+import mapDateFormat from '../Mappers/MapDateFormat'
 
 interface Failure {
   failureType: number;
@@ -49,11 +52,11 @@ const FailureList: React.FC = () => {
                       <tr key={index}>
                           <td>{failure.id}</td>
                           <td>{failure.name}</td>
-                          <td>{failure.failureType}</td>
-                          <td>{failure.date}</td>
+                          <td>{mapFailureTypeToText(failure.failureType)}</td>
+                          <td>{mapDateFormat(failure.date)}</td>
                           <td>{failure.potentialPrice}</td>
-                          <td>{failure.potentialDate}</td>
-                          <td>{failure.status}</td>
+                          <td>{mapDateFormat(failure.potentialDate)}</td>
+                          <td>{mapStatusToText(failure.status)}</td>
                           <td>{failure.repairDescription}</td>
                           <td><a href={`/failure/details/${failure.id}`}><button>Failure details</button></a></td>
                       </tr>
