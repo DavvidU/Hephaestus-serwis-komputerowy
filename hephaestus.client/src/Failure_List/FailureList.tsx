@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 interface Failure {
-  id: number;
-  failureType: string;
+  failureType: number;
   name: string;
   date: string;
   potentialPrice: number;
   potentialDate: string;
-  status: string;
+  status: number;
   repairDescription: string;
 }
 
@@ -18,7 +17,7 @@ const FailureList: React.FC = () => {
   useEffect(() => {
     const fetchFailures = async () => {
       try {
-        const response = await axios.get<Failure[]>('https://localhost:7292/get-failures');
+        const response = await axios.get<Failure[]>('https://localhost:7292/failures');
         setFailures(response.data);
       } catch (error) {
         console.error('Error fetching failures:', error);
