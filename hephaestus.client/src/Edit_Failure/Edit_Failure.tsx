@@ -82,7 +82,7 @@ function Edit_Failure() {
 
             try {
                 const response = await axios.put(
-                    `https://localhost:7292/faiilures/${id}`,
+                    `https://localhost:7292/failures/${id}`,
                     convertedData
                 );
 

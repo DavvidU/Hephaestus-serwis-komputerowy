@@ -66,7 +66,7 @@ app.MapGet("/failures/{id}", async (int id, HephaestusDbContext hephaestusDbCont
 
 /* Update */
 
-app.MapPut("/faiilures/{id}", async (int id, Failure failureToPut, HephaestusDbContext hephaestusDbContext) =>
+app.MapPut("/failures/{id}", async (int id, Failure failureToPut, HephaestusDbContext hephaestusDbContext) =>
 {
     // Validation
     if (!FailureVaildator.IsFailureVaild(failureToPut)) 
