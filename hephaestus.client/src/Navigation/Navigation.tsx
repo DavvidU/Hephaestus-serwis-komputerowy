@@ -14,9 +14,9 @@ function Navigation() {
                 <Navbar.Brand>
                 </Navbar.Brand>
                 <Nav className="me-auto">
-                    <Nav.Link as={Link} to={"/"}>Strona Główna</Nav.Link>
-                    <Nav.Link as={Link} to={"/failure/list"}>Lista awarii</Nav.Link>
-                    <Nav.Link as={Link} to={"/failure/add"}>Dodaj awarię</Nav.Link>
+                    <Nav.Link as={Link} to={"/"}>Home page</Nav.Link>
+                    <Nav.Link as={Link} to={"/failure/list"}>Failure list</Nav.Link>
+                    <Nav.Link as={Link} to={"/failure/add"}>Add failure</Nav.Link>
                 </Nav>
             </Navbar>
 
