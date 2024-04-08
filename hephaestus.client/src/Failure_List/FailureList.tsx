@@ -29,21 +29,37 @@ const FailureList: React.FC = () => {
 
   return (
     <div>
-      <h2>List of Failures</h2>
-      <ul>
-        {failures.map((failure, index) => (
-          <li key={index}>
-            <strong>ID:</strong> {failure.id}<br />
-            <strong>Name:</strong> {failure.name}<br />
-            <strong>Failure Type:</strong> {failure.failureType}<br />
-            <strong>Date:</strong> {failure.date}<br />
-            <strong>Potential Price:</strong> {failure.potentialPrice}<br />
-            <strong>Potential Date:</strong> {failure.potentialDate}<br />
-            <strong>Status:</strong> {failure.status}<br />
-            <strong>Repair Description:</strong> {failure.repairDescription}<br />
-          </li>
-        ))}
-      </ul>
+      <h2>Failure list</h2>
+          <table>
+              <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Failure Type</th>
+                        <th>Date</th>
+                        <th>Potential Price</th>
+                        <th>Potential Date</th>
+                        <th>Status</th>
+                        <th>Repair Description</th>
+                        <th>Action</th>
+                    </tr>
+              </thead>
+              <tbody>
+                  {failures.map((failure, index) => (
+                      <tr key={index}>
+                          <td>{failure.id}</td>
+                          <td>{failure.name}</td>
+                          <td>{failure.failureType}</td>
+                          <td>{failure.date}</td>
+                          <td>{failure.potentialPrice}</td>
+                          <td>{failure.potentialDate}</td>
+                          <td>{failure.status}</td>
+                          <td>{failure.repairDescription}</td>
+                          <td><a href={`/failure/details/${failure.id}`}><button>Failure details</button></a></td>
+                      </tr>
+                  ))}
+              </tbody>
+          </table>
     </div>
   );
 };

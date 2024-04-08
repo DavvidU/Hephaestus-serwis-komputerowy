@@ -33,3 +33,21 @@ th, td {
     height: 50%;
     animation: logo-spin 20s linear infinite;
 }
+
+table {
+    background-color: black !important;
+    color: white !important;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    table th, table td {
+        background-color: gray;
+        color: white;
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+    table th {
+        background-color: #333;
+    }
